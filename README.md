@@ -5,10 +5,10 @@ Updatable nickname linked to each tag that players can optionally use to change 
 
 ```mermaid
 flowchart TD
-	A[New Player] --> B{Claim Gamer Tag} --> C{Set Nickname} --> D[Play Games!]
+	A[New Player] --> B{Claim Gamer Tag\n#NugsyNash} --> C{Set Nickname\n@Nugsy} --> D[Play Games!]
 	B --> D 
 	
-	E[Existing Player] --> F{Change Nickname}
+	E[Existing Player] --> F{Change Nickname\n@TJ}
 	F --> D 
 ```
 
