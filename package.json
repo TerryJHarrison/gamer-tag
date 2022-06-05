@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "truffle test",
-    "compile": "truffle compile",
+    "compile": "truffle compile --all",
+    "networks": "truffle networks",
     "deploy:mumbai": "truffle migrate --compile-all --network mumbai --f 1 --to 1",
     "deploy:mumbai:verify": "truffle run verify GamerTag --network mumbai"
   },

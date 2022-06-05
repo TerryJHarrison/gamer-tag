@@ -1,10 +1,5 @@
 const path = require("path");
-const fs = require('fs');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-const mnemonic = fs.readFileSync(".secret").toString().trim();
-const polygonScanApiKey = fs.readFileSync(".polygon-scan-api-key").toString().trim();
-const infuraApiKey = fs.readFileSync(".infura-api-key").toString().trim();
 
 module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
@@ -13,7 +8,7 @@ module.exports = {
       port: 8545
     },
     mumbai: {
-      provider: () => new HDWalletProvider(mnemonic, `https://polygon-mumbai.infura.io/v3/${infuraApiKey}`),
+      provider: () => new HDWalletProvider(process.env.DEPLOY_MNEMONIC, process.env.ALCHEMY_URL_MUMBAI),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
@@ -27,6 +22,6 @@ module.exports = {
   },
   plugins: ['truffle-plugin-verify'],
   api_keys: {
-    polygonscan: polygonScanApiKey
+    polygonscan: process.env.POLYGON_SCAN_API_KEY
   }
 };
