@@ -35,7 +35,7 @@ const ClaimTagCards = ({styles, activeChain}) => {
             <br/><br/>
             Your gamer tag will be permanently associated with the claiming address.<br/>
             Tags are unique, no one else will be able to claim yours.<br/>
-            All tags start with a # character, example: #NugsyNash
+            All tags will be displayed with a # character, example: #NugsyNash
           </Typography>
         </CardContent>
       </Card>
@@ -59,7 +59,7 @@ const ClaimTagCards = ({styles, activeChain}) => {
           <Typography color="textSecondary" gutterBottom>
             After claiming your tag, you will have the option to set a nickname.<br/>
             If a nickname is set then it will be used as your in-game display name instead of your tag.<br/>
-            All tags start with a @ character, example: @Nugsy
+            All nicknames will be displayed with a @ character, example: @Nugsy
             <br/><br/>
             The only cost to change your nickname is gas.
           </Typography>

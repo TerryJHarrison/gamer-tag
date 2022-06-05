@@ -85,7 +85,7 @@ const ManageTagCards = ({account, tag, styles, activeChain}) => {
           <Typography color="textSecondary" gutterBottom>
             If a nickname is set then it will be used as your in-game display name instead of your tag.<br/>
             You may also clear your nickname if one is set, using your tag as your in-game display name again.<br/>
-            All nicknames start with a @ character, example: @Nugsy
+            All nicknames will be displayed with a @ character, example: @Nugsy
             <br/><br/>
             The only cost to change your nickname is gas.
           </Typography>
