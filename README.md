@@ -1,6 +1,8 @@
 # Gamer-Tag.xyz
-One-time claim, one-per-address, unique gamer tags built and living on the blockchain. 
-Updatable nickname linked to each tag that players can optionally use to change their in-game display names.
+
+One-time, one-per-address, unique claimable gamer tags built and living on the blockchain. Once claimed, they can not be transferred.
+Updatable nickname linked to each tag that players can optionally use to change their in-game display names whenever they want.
+
 - [Contract Interface - IGamerTag](contracts/IGamerTag.sol)
 - [Client Overview](client/README.md)
 
