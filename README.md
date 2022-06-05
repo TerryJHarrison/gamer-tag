@@ -5,12 +5,11 @@ Updatable nickname linked to each tag that players can optionally use to change 
 
 ```mermaid
 flowchart TD
-	A[New User] --> B{Claim Gamer Tag}
-	B --> C{Set Nickname}
-	C[Existing User] --> D{Change Nickname}
-	C --> D --> E[Play Games!]
-	B --> E
-	C --> E
+	A[New Player] --> B{Claim Gamer Tag} --> C{Set Nickname} --> D[Play Games!]
+	B --> D 
+	
+	E[Existing Player] --> F{Change Nickname}
+	F --> D 
 ```
 
 - [Contract Interface - IGamerTag](contracts/IGamerTag.sol)
