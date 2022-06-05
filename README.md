@@ -4,15 +4,13 @@ One-time, one-per-address, unique claimable gamer tags built and living on the b
 Updatable nickname linked to each tag that players can optionally use to change their in-game display names whenever they want.
 
 ```mermaid
-journey
-	title User Experience
-	section New User
-		Claims gamer tag: 1: Me
-		Sets nickname: 2: Me
-	section Existing User
-		Change nickname: 3: Me
-    section Play Games!
-        See you chosen name across all integrated games: 4: Me
+flowchart TD
+	A[New User] --> B{Claim Gamer Tag}
+	B --> C{Set Nickname}
+	C[Existing User] --> D{Change Nickname}
+	C --> D --> E[Play Games!]
+	B --> E
+	C --> E
 ```
 
 - [Contract Interface - IGamerTag](contracts/IGamerTag.sol)
