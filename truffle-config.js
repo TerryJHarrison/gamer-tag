@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require("path");
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
@@ -11,7 +12,7 @@ module.exports = {
       provider: () => new HDWalletProvider(process.env.DEPLOY_MNEMONIC, process.env.ALCHEMY_URL_MUMBAI),
       network_id: 80001,
       confirmations: 2,
-      timeoutBlocks: 200,
+      timeoutBlocks: 5,
       skipDryRun: true
     }
   },

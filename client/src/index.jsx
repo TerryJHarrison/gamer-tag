@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from "react-router-dom";
 import '@rainbow-me/rainbowkit/dist/index.css';
 import {
   getDefaultWallets,
-  RainbowKitProvider
+  RainbowKitProvider,
+  lightTheme
 } from '@rainbow-me/rainbowkit';
 import {
   chain,
@@ -15,6 +17,7 @@ import {
 } from 'wagmi';
 import {alchemyProvider} from 'wagmi/providers/alchemy';
 import {publicProvider} from 'wagmi/providers/public';
+import {SnackbarProvider} from 'notistack';
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
@@ -25,7 +28,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'Gamer-Tag.xyz',
+  appName: 'gamer-tag',
   chains
 });
 
@@ -35,10 +38,20 @@ const wagmiClient = createClient({
   provider
 })
 
+
 ReactDOM.render(
   <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains}>
-      <App/>
+    <RainbowKitProvider chains={chains} theme={lightTheme({
+      accentColor: '#1976d2',
+      borderRadius: 'small',
+      fontStack: 'system',
+      overlayBlur: 'small'
+    })}>
+      <BrowserRouter>
+        <SnackbarProvider maxSnack={3}>
+          <App/>
+        </SnackbarProvider>
+      </BrowserRouter>
     </RainbowKitProvider>
   </WagmiConfig>,
   document.getElementById('root')

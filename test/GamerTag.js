@@ -14,6 +14,11 @@ contract("GamerTag", (accounts) => {
     assert.equal(await gamerTag.getTag(tj), "NugsyNash");
   });
 
+  it("allows searching by tag", async () => {
+    assert.equal(await gamerTag.tagLookup("NugsyNash"), tj);
+    assert.equal(await gamerTag.tagLookup("TagNotClaimed"), 0x0);
+  });
+
   it("allows setting a nickname", async () => {
     await gamerTag.setNickname("Nugsy");
     assert.equal(await gamerTag.getNickname(tj), "Nugsy");
@@ -30,10 +35,10 @@ contract("GamerTag", (accounts) => {
   });
 
   it("prevents claiming a duplicate gamer tag", async () => {
-    await expectRevert(gamerTag.claimTag("NugsyNash", {from: justin}), "GamerTag: that tag has already been claimed");
+    await expectRevert(gamerTag.claimTag("NugsyNash", {from: justin}), "GT: tag already claimed");
   });
 
   it("prevents user from changing tag", async () => {
-    await expectRevert(gamerTag.claimTag("Unchanging", {from: tj}), "GamerTag: address can only have one tag");
+    await expectRevert(gamerTag.claimTag("Unchanging", {from: tj}), "GT: address has tag");
   });
 })
