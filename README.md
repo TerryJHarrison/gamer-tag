@@ -8,9 +8,9 @@ This application is designed to be a public good owned by no one and requiring n
 See the roadmap below to make sure that it remains that way for all-time. 
 ```mermaid
 flowchart TD
-	testContract["1. Contracts deployed (DONE)"]
+	testContract["1. Contract deployed on testnet (DONE)"]
 	centralizedWeb["2. Website deployed on centralized architecture (DONE)"]
-	contract["3. Contracts deployed"]
+	contract["3. Contracts deployed on Polygon"]
 	decentralizedWeb["4. Website deployed on IPFS"]
 	centralizedTestSite["5. Centralized test site deployed, using decentralized backend (DONE)<br/><b>gamer-tag.xyz</b>"]
 	permanentDomain["6. Permanent domain registered (DONE)"]
@@ -18,12 +18,15 @@ flowchart TD
 	decentralizedApplication["8. Fully decntralized public good<br/><b>gamer-tag.blockchain</b>"]
 	
 	testContract --> centralizedTestSite
+	contract --> centralizedTestSite
 	centralizedWeb --> centralizedTestSite
 	
 	testContract --> decentralizedWeb
+	contract --> decentralizedWeb
 	decentralizedWeb --> permanentDomain --> noDomainOwner
 	
 	testContract --> decentralizedApplication
+	contract --> decentralizedApplication
 	decentralizedWeb --> decentralizedApplication
 	permanentDomain --> decentralizedApplication
 	noDomainOwner --> decentralizedApplication
