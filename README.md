@@ -8,7 +8,7 @@ This application is designed to be a public good owned by no one and requiring n
 Below is our roadmap to make sure that it remains that way for all-time. 
 ```mermaid
 flowchart LR
-	A{"<h2>Contracts deployed</h2> No proxies, immutable contracts. No contract owner, once deployed the contract becomes a public good."}
+	A{"<h1>Contracts deployed</h1><h2>No proxies, immutable contract. No contract owner</h2><h2>Once deployed the contract becomes a public good.</h2>"}
 	B{"Website deployed on centralized architecture (Namecheap + AWS) at gamer-tag.xyz. Quick and easy - work out the site's kinks in this phase before deploying the permanent front-end."}
 	C{"Website deployed on IPFS. This will replace AWS from the centralized architecture."}
 	D{"Permanent domain registered (gamer-tag.blockchain) through Unstoppable Domains. Unstoppable offers permanent (buy once, own forever) domains whose ownership is controlled via NFTs. This will replace Namecheap from the centralized architecture. Once configured, the decentralized architecutre will be fully available for use."}
