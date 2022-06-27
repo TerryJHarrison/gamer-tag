@@ -8,30 +8,30 @@ This application is designed to be a public good owned by no one and requiring n
 See the roadmap below to make sure that it remains that way for all-time. 
 ```mermaid
 flowchart TD
-	contracts["1. Contracts deployed"]
+	testContract["1. Contracts deployed (DONE)"]
+	centralizedWeb["2. Website deployed on centralized architecture (DONE)"]
+	contract["3. Contracts deployed"]
+	decentralizedWeb["4. Website deployed on IPFS"]
+	centralizedTestSite["5. Centralized test site deployed, using decentralized backend (DONE)<br/><b>gamer-tag.xyz</b>"]
+	permanentDomain["6. Permanent domain registered (DONE)"]
+	noDomainOwner["7. Ownership of the gamer-tag.blockchain domain transferred to the smart contract"]
+	decentralizedApplication["8. Fully decntralized public good<br/><b>gamer-tag.blockchain</b>"]
 	
-	centralizedWeb["2. Website deployed on centralized architecture"]
-	decentralizedWeb["3. Website deployed on IPFS"]
-	
-	centralizedTestSite["4. Centralized test site deployed, using decentralized backend<br/><b>gamer-tag.xyz</b>"]
-	
-	permanentDomain["5. Permanent domain registered"]
-	noDomainOwner["6. Ownership of the gamer-tag.blockchain domain transferred to the smart contract"]
-	
-	decentralizedApplication["7. Fully decntralized public good<br/><b>gamer-tag.blockchain</b>"]
-	
-	contracts --> centralizedTestSite
+	testContract --> centralizedTestSite
 	centralizedWeb --> centralizedTestSite
 	
-	contracts --> decentralizedWeb
+	testContract --> decentralizedWeb
 	decentralizedWeb --> permanentDomain --> noDomainOwner
 	
-	contracts --> decentralizedApplication
+	testContract --> decentralizedApplication
 	decentralizedWeb --> decentralizedApplication
 	permanentDomain --> decentralizedApplication
 	noDomainOwner --> decentralizedApplication
 	
-	style contracts fill:#42b983
+	style testContract fill:#42b983
+	style centralizedWeb fill:#42b983
+	style centralizedTestSite fill:#42b983
+	style permanentDomain fill:#42b983
 ```
 - No proxies, immutable contract. 
 - No contract owner.
