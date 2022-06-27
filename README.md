@@ -13,7 +13,8 @@ flowchart LR
 	C["Website deployed on IPFS. This will replace AWS from the centralized architecture."]
 	D["Permanent domain registered (gamer-tag.blockchain) through Unstoppable Domains. Unstoppable offers permanent (buy once, own forever) domains whose ownership is controlled via NFTs. This will replace Namecheap from the centralized architecture. Once configured, the decentralized architecutre will be fully available for use."]
 	E["Ownership of the gamer-tag.blockchain domain transferred to the smart contract. This will ensure no further changes to the front-end of the application. Once transferred the website becomes a public good."]
-	A --> B --> C --> D --> E 
+	A --> B
+	C --> D --> E 
 ```
 
 - [Contract Interface - IGamerTag](contracts/IGamerTag.sol)
