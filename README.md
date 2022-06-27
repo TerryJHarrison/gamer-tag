@@ -15,6 +15,8 @@ flowchart LR
 	E{"Ownership of the gamer-tag.blockchain domain transferred to the smart contract. This will ensure no further changes to the front-end of the application. Once transferred the website becomes a public good."}
 	A --> B
 	C --> D --> E 
+	
+	style A text-size:22px;
 ```
 
 - [Contract Interface - IGamerTag](contracts/IGamerTag.sol)
