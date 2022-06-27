@@ -5,9 +5,9 @@ Updatable nickname linked to each tag that players can optionally use to change 
 
 ### Path to Decentralization
 This application is designed to be a public good owned by no one and requiring no maintenance or support to stay available. 
-Below is our roadmap to make sure that it remains that way for all-time. 
+See the roadmap below to make sure that it remains that way for all-time. 
 ```mermaid
-flowchart LR
+flowchart TD
 	A["<h1>Contracts deployed</h1><h2>No proxies, immutable contract. No contract owner</h2><h2>Once deployed the contract becomes a public good.</h2>"]
 	B["<h1>Website deployed on centralized architecture</h1><h2>Via Namecheap and AWS at gamer-tag.xyz.</h2><h2>Quick and easy - work out the site's kinks in this phase before deploying the permanent front-end.</h2>"]
 	C["<h1>Website deployed on IPFS</h1><h2>This will replace AWS from the centralized architecture.</h2>"]
