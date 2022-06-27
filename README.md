@@ -9,10 +9,10 @@ Below is our roadmap to make sure that it remains that way for all-time.
 ```mermaid
 flowchart LR
 	A{"<h1>Contracts deployed</h1><h2>No proxies, immutable contract. No contract owner</h2><h2>Once deployed the contract becomes a public good.</h2>"}
-	B{"Website deployed on centralized architecture (Namecheap + AWS) at gamer-tag.xyz. Quick and easy - work out the site's kinks in this phase before deploying the permanent front-end."}
-	C{"Website deployed on IPFS. This will replace AWS from the centralized architecture."}
-	D{"Permanent domain registered (gamer-tag.blockchain) through Unstoppable Domains. Unstoppable offers permanent (buy once, own forever) domains whose ownership is controlled via NFTs. This will replace Namecheap from the centralized architecture. Once configured, the decentralized architecutre will be fully available for use."}
-	E{"Ownership of the gamer-tag.blockchain domain transferred to the smart contract. This will ensure no further changes to the front-end of the application. Once transferred the website becomes a public good."}
+	B{"<h1>Website deployed on centralized architecture</h1><h2>Via Namecheap and AWS at gamer-tag.xyz.</h2><h2>Quick and easy - work out the site's kinks in this phase before deploying the permanent front-end.</h2>"}
+	C{"<h1>Website deployed on IPFS</h1><h2>This will replace AWS from the centralized architecture.</h2>"}
+	D{"<h1>Permanent domain registered<h1> <h2>At gamer-tag.blockchain through Unstoppable Domains.</h2><h2>Unstoppable offers permanent (buy once, own forever) domains whose ownership is controlled via NFTs.</h2><h2>This will replace Namecheap from the centralized architecture. Once configured, the decentralized architecutre will be fully available for use.</h2>"}
+	E{"<h1>Ownership of the gamer-tag.blockchain domain transferred to the smart contract</h1><h2>This will ensure no further changes to the front-end of the application.</h2><h2>Once transferred the website becomes a public good.</h2>"}
 	A --> B
 	C --> D --> E 
 	
