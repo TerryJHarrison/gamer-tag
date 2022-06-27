@@ -30,8 +30,6 @@ flowchart TD
 	decentralizedWeb --> decentralizedApplication
 	permanentDomain --> decentralizedApplication
 	noDomainOwner --> decentralizedApplication
-	
-	style A text-size:22px;
 ```
 - No proxies, immutable contract. 
 - No contract owner.
