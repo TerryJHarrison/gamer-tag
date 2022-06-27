@@ -46,7 +46,7 @@ flowchart TD
 - [Client Overview](client/README.md)
 
 ### Contracts currently deployed on:
-- [Mumbai Testnet](https://mumbai.polygonscan.com/address/0x580d9b3f016b9759db279381877bf69e9dac22e1)
+- [Mumbai Testnet](https://mumbai.polygonscan.com/address/0x22Cbf865059c4DbaAb19101e81986e8b78D67688) - `0x22Cbf865059c4DbaAb19101e81986e8b78D67688`
 - Polygon - Coming soon...
 
 ### Tools used:
