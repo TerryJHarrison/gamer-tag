@@ -15,7 +15,7 @@ flowchart TD
 	
 	centralizedTestSite["4. Centralized test site deployed, using decentralized backend<br/><b>gamer-tag.xyz</b>"]
 	
-	permanentDomain["5. Permanent domain registered<h1> <h2>At gamer-tag.blockchain through Unstoppable Domains."]
+	permanentDomain["5. Permanent domain registered"]
 	noDomainOwner["6. Ownership of the gamer-tag.blockchain domain transferred to the smart contract"]
 	
 	decentralizedApplication["7. Fully decntralized public good<br/><b>gamer-tag.blockchain</b>"]
