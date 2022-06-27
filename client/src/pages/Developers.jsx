@@ -33,7 +33,7 @@ const Developers = ({styles}) => {
                 &nbsp;&nbsp;- <Link href="https://mumbai.polygonscan.com/address/0x580d9b3f016b9759db279381877bf69e9dac22e1#code">Mumbai Testnet</Link>
               </Typography>
               <Typography color="textSecondary">
-                &nbsp;&nbsp;- <Link href="https://polygonscan.com/address/0x580d9b3f016b9759db279381877bf69e9dac22e1#code">Polygon</Link>
+                &nbsp;&nbsp;- Polygon - coming soon...
               </Typography>
             </CardContent>
           </Card>

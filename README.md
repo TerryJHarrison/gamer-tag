@@ -46,8 +46,8 @@ flowchart TD
 - [Client Overview](client/README.md)
 
 ### Contracts currently deployed on:
-- [Mumbai Testnet](https://mumbai.polygonscan.com/address/TODO)
-- [Polygon](https://polygonscan.com/address/TODO)
+- [Mumbai Testnet](https://mumbai.polygonscan.com/address/0x580d9b3f016b9759db279381877bf69e9dac22e1)
+- Polygon - Coming soon...
 
 ### Tools used:
 - [OpenZeppelin](https://docs.openzeppelin.com/contracts/4.x/)
