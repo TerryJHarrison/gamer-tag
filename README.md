@@ -10,7 +10,7 @@ See the roadmap below to make sure that it remains that way for all-time.
 flowchart TD
 	testContract["Contract deployed on testnet (DONE)"]
 	centralizedWeb["Website deployed on centralized architecture (DONE)"]
-	centralizedTestSite["Centralized test site deployed, using decentralized backend (DONE)<br/><b>gamer-tag.xyz</b>"]
+	centralizedTestSite["Test site deployed (DONE)<br/>Centralized frontend with decentralized backend<br/><b>gamer-tag.xyz</b>"]
 	contract["Contracts deployed on Polygon"]
 	decentralizedWeb["Website deployed on IPFS"]
 	permanentDomain["Permanent domain registered (DONE)"]
