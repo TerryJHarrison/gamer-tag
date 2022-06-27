@@ -4,7 +4,7 @@ One-time, one-per-address, unique claimable gamer tags built and living on the b
 Updatable nickname linked to each tag that players can optionally use to change their in-game display names whenever they want.
 
 ### Path to Decentralization
-This application is designed to be a public good owned by no-one and requiring no maintenance or support to stay available. 
+This application is designed to be a public good owned by no one and requiring no maintenance or support to stay available. 
 Below is our roadmap to make sure that it remains that way for all-time. 
 ```mermaid
 flowchart LR
