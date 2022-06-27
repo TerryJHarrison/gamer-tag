@@ -10,9 +10,10 @@
     "deploy:mumbai:verify": "truffle run verify GamerTag --network mumbai"
   },
   "devDependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
     "@openzeppelin/test-helpers": "^0.5.15",
     "@truffle/hdwallet-provider": "^2.0.1",
-    "truffle-plugin-verify": "^0.5.21",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "truffle-plugin-verify": "^0.5.21"
   }
 }

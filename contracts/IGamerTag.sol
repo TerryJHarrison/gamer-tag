@@ -61,4 +61,9 @@ interface IGamerTag {
   // @param _tag tag to lookup address for
   // @return Tag's address
   function tagLookup(string memory _tag) external view returns(address);
+
+  // @name On ERC721 Received
+  // @notice Support receiving ERC721 tokens, there is no way to retrieve anything sent to the contract.
+  // @dev This is to support owning permanent domain names minted as NFTs
+  function onERC721Received(address, address, uint256, bytes calldata) external view returns (bytes4);
 }

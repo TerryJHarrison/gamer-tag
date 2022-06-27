@@ -58,4 +58,11 @@ contract GamerTag is IGamerTag {
     tagClaimedAt[msg.sender] = block.timestamp;
     emit TagClaim(msg.sender, _tag, block.timestamp);
   }
+
+  // @name On ERC721 Received
+  // @notice Support receiving ERC721 tokens, there is no way to retrieve anything sent to the contract.
+  // @dev This is to support owning permanent domain names minted as NFTs
+  function onERC721Received(address, address, uint256, bytes calldata) external pure override returns (bytes4) {
+    return this.onERC721Received.selector;
+  }
 }
