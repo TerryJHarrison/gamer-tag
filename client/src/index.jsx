@@ -31,7 +31,7 @@ const needsInjectedWalletFallback =
   !window.ethereum.isCoinbaseWallet;
 const connectors = connectorsForWallets([
   {
-    groupName: 'Recommended',
+    groupName: 'Popular',
     wallets: [
       wallet.argent({chains}),
       wallet.brave({chains}),
