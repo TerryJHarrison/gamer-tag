@@ -15,20 +15,16 @@ import {
   createClient,
   WagmiConfig,
 } from 'wagmi';
-import {alchemyProvider} from 'wagmi/providers/alchemy';
 import {publicProvider} from 'wagmi/providers/public';
 import {SnackbarProvider} from 'notistack';
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
-  [
-    alchemyProvider({alchemyId: process.env.ALCHEMY_ID}),
-    publicProvider()
-  ]
+  [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'gamer-tag',
+  appName: '#gamer-tag',
   chains
 });
 
