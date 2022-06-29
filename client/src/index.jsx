@@ -56,12 +56,14 @@ const wagmiClient = createClient({
 
 ReactDOM.render(
   <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains} theme={lightTheme({
-      accentColor: '#1976d2',
-      borderRadius: 'small',
-      fontStack: 'system',
-      overlayBlur: 'small'
-    })}>
+    <RainbowKitProvider chains={chains}
+                        appInfo={{appName: '#gamer-tag'}}
+                        theme={lightTheme({
+                          accentColor: '#1976d2',
+                          borderRadius: 'small',
+                          fontStack: 'system',
+                          overlayBlur: 'small'
+                        })}>
       <BrowserRouter>
         <SnackbarProvider maxSnack={3}>
           <App/>
