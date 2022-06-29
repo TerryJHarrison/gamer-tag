@@ -62,6 +62,7 @@ interface IGamerTag {
   // @return Tag's address
   function tagLookup(string memory _tag) external view returns(address);
 
+  // --- Decentralization Support ---
   // @name On ERC721 Received
   // @notice Support receiving ERC721 tokens, there is no way to retrieve anything sent to the contract.
   // @dev This is to support owning permanent domain names minted as NFTs

@@ -4,6 +4,7 @@ pragma solidity ^0.8.11;
 import "./IGamerTag.sol";
 
 // @title Gamer Tag
+// @notice Simple on-chain gamer identities. Permanent tags with changeable nicknames.
 contract GamerTag is IGamerTag {
   mapping(address => string) private tags;          // Gamer addresses -> tags (unique)
   mapping(string => address) public tagLookup;      // Gamer tags -> addresses
@@ -11,6 +12,7 @@ contract GamerTag is IGamerTag {
   mapping(string => address) private claimedTags;   // Tags -> gamer address with it set
   mapping(address => uint256) public tagClaimedAt;  // Gamer addresses -> tag claim time
 
+  // --- Nicknames ---
   // @name Get Nickname
   // @notice Gets an addresses nickname, will return an empty string if none is set
   // @param _address The address to lookup nickname for
@@ -27,26 +29,27 @@ contract GamerTag is IGamerTag {
     emit NicknameChange(msg.sender, _nickname);
   }
 
-  // @name Is Tag Available?
-  // @notice Checks if a tag has already been claimed
-  // @param _tag The gamer tag to set for the calling player
-  // @return Whether the tag is available to claim
-  function isTagAvailable(string memory _tag) external view returns(bool){
-    return claimedTags[_tag] == address(0);
-  }
-
+  // --- Gamer Tags ---
   // @name Get Tag
   // @notice Gets an addresses set tag, will return an empty string if none is set
-  // @param _address address to tag nickname for
+  // @param _address address to get nickname for
   // @return Addresses gamer tag
   function getTag(address _address) external view returns(string memory) {
     return tags[_address];
   }
 
+  // @name Is Tag Available?
+  // @notice Checks if a tag has already been claimed
+  // @param _tag The gamer tag to check on
+  // @return Whether the tag is available to claim
+  function isTagAvailable(string memory _tag) external view returns(bool){
+    return claimedTags[_tag] == address(0);
+  }
+
   // @name Claim Tag
   // @notice Will permanently claim an available tag for the calling address, only callable once per address
-  // @dev Will throw an error if the tag has already been claimed
-  // @param _tag The gamer tag to set for the calling player
+  // @dev Will throw an error if the tag has already been claimed or address haas already claimed a tag
+  // @param _tag The gamer tag to set claim for the calling player
   function claimTag(string memory _tag) external {
     require(claimedTags[_tag] == address(0), "GT: tag already claimed");
     require(tagClaimedAt[msg.sender] == 0, "GT: address has tag");
@@ -59,6 +62,7 @@ contract GamerTag is IGamerTag {
     emit TagClaim(msg.sender, _tag, block.timestamp);
   }
 
+  // --- Decentralization Support ---
   // @name On ERC721 Received
   // @notice Support receiving ERC721 tokens, there is no way to retrieve anything sent to the contract.
   // @dev This is to support owning permanent domain names minted as NFTs

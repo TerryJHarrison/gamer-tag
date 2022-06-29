@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import '@rainbow-me/rainbowkit/dist/index.css';
 import {
   getDefaultWallets,
@@ -18,7 +18,7 @@ import {
 import {publicProvider} from 'wagmi/providers/public';
 import {SnackbarProvider} from 'notistack';
 
-const {chains, provider} = configureChains(
+const {chains, provider, webSocketProvider} = configureChains(
   [chain.polygonMumbai],
   [publicProvider()]
 );
@@ -27,11 +27,11 @@ const {connectors} = getDefaultWallets({
   appName: '#gamer-tag',
   chains
 });
-
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider
+  provider,
+  webSocketProvider
 })
 
 ReactDOM.render(
