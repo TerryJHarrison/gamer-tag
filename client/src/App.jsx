@@ -9,7 +9,7 @@ import { makeStyles } from '@mui/styles';
 import Lookup from "./pages/Lookup";
 import Developers from "./pages/Developers";
 
-const App = ({}) => {
+const App = () => {
   const useStyles = makeStyles({
     root: {
       backgroundColor: "#000"

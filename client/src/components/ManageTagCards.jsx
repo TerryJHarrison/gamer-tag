@@ -10,30 +10,31 @@ import {useSnackbar} from 'notistack';
 import GamerTag from "../contracts/GamerTag.json";
 
 const ManageTagCards = ({tag, styles}) => {
-  const {data: account} = useAccount();
-  const {activeChain} = useNetwork();
+  const {chain} = useNetwork();
+  const {address} = useAccount();
   const {enqueueSnackbar} = useSnackbar();
   const [updateTxn, setUpdateTxn] = useState('');
+  const [nicknameInput, setNicknameInput] = useState("");
 
   const {data: nickname} = useContractRead({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-  }, "getNickname", {
-    args: account?.address
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: "getNickname",
+    args: address,
+    watch: true
   });
 
   const {data: tagClaimedAt} = useContractRead({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-  }, "tagClaimedAt", {
-    args: account?.address
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: "tagClaimedAt",
+    args: address
   });
 
-  const [nicknameInput, setNicknameInput] = useState("");
   const {writeAsync: setNickname} = useContractWrite({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-    }, 'setNickname', {
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: 'setNickname',
     onSuccess(data) {
       setUpdateTxn(data.hash);
       enqueueSnackbar("Updating nickname...", {
@@ -46,6 +47,7 @@ const ManageTagCards = ({tag, styles}) => {
     }
   });
 
+  // Listen for successful setNickname calls
   useWaitForTransaction({
     hash: updateTxn,
     onSuccess() {
@@ -57,12 +59,12 @@ const ManageTagCards = ({tag, styles}) => {
         }
       });
       setUpdateTxn('');
-    },
+    }
   })
 
   const handleNicknameChange = event => setNicknameInput(event.target.value);
   const handleSetNickname = async () => setNickname({args: nicknameInput.startsWith("@") ? nicknameInput.substring(1) : nicknameInput});
-  const handleClearNickname = () => setNickname({args: [""]});
+  const handleClearNickname = async () => setNickname({args: [""]});
 
   const d = new Date(tagClaimedAt * 1000); // Used for datetime formatting
   return (
@@ -108,7 +110,7 @@ const ManageTagCards = ({tag, styles}) => {
           <Typography color="textSecondary" gutterBottom>
             If a nickname is set then it will be used as your in-game display name instead of your tag.<br/>
             You may also clear your nickname if one is set, using your tag as your in-game display name again.<br/>
-            All nicknames will be displayed with a <b>@</b> character, example: <b>@</b>Nugsy
+            All nicknames will be displayed with an <b>@</b> character, example: <b>@</b>Nugsy
             <br/><br/>
             The only cost to change your nickname is gas.
           </Typography>

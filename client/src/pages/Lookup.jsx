@@ -6,21 +6,21 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LookupAddressCards from "../components/LookupAddressCards";
 import LookupPlayerCards from "../components/LookupPlayerCards";
-import {useConnect} from "wagmi";
+import {useAccount} from "wagmi";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 
 const Lookup = ({styles}) => {
-  const {activeConnector} = useConnect();
+  const {isConnected} = useAccount();
   return (
       <Box component="span">
         <Container className={styles.topPadded}>
-          {activeConnector &&
+          {isConnected &&
           <>
             <LookupAddressCards styles={styles}/>
             <LookupPlayerCards styles={styles}/>
           </>
           }
-          {!activeConnector &&
+          {!isConnected &&
           <Card className={styles.topMargined}>
             <CardContent>
               <Typography variant="h5" component="h2">

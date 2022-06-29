@@ -5,22 +5,22 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React, {useState} from "react";
 import GamerTag from "../contracts/GamerTag.json";
-import {useContractWrite, useConnect, useNetwork, useWaitForTransaction} from "wagmi";
+import {useContractWrite, useAccount, useNetwork, useWaitForTransaction} from "wagmi";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 import {useSnackbar} from 'notistack';
 
 const ClaimTagCards = ({styles}) => {
+  const {chain} = useNetwork();
+  const {isConnected} = useAccount();
   const [tagInput, setTagInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const {activeConnector} = useConnect();
-  const {activeChain} = useNetwork();
-  const {enqueueSnackbar} = useSnackbar();
   const [updateTxn, setUpdateTxn] = useState('');
+  const {enqueueSnackbar} = useSnackbar();
 
   const {write: setTag} = useContractWrite({
-      addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-      contractInterface: GamerTag?.abi
-    }, 'claimTag', {
+      addressOrName: GamerTag?.networks[chain?.id]?.address,
+      contractInterface: GamerTag?.abi,
+      functionName: 'claimTag',
       onError(error) {
         if(error.reason === "execution reverted: GT: tag already claimed"){
           enqueueSnackbar("Tag has already been claimed, try another!", {
@@ -56,6 +56,7 @@ const ClaimTagCards = ({styles}) => {
     }
   );
 
+  // Listen for successful setTag calls
   useWaitForTransaction({
     hash: updateTxn,
     onSuccess() {
@@ -67,7 +68,7 @@ const ClaimTagCards = ({styles}) => {
         }
       });
       setUpdateTxn('');
-    },
+    }
   })
 
   const handleSetTag = () => setTag({args: tagInput.startsWith("#") ? tagInput.substring(1) : tagInput});
@@ -85,7 +86,7 @@ const ClaimTagCards = ({styles}) => {
             <br/><br/>
             Your gamer tag will be permanently associated with the claiming address.<br/>
             Tags are unique, no one else will be able to claim yours.<br/>
-            All tags will be displayed with a <b>#</b> character, example: <b>#</b>NugsyNash
+            All tags will be displayed with an <b>#</b> character, example: <b>#</b>NugsyNash
           </Typography>
         </CardContent>
       </Card>
@@ -99,10 +100,10 @@ const ClaimTagCards = ({styles}) => {
           {!errorMessage &&
           <><br/><br/></>
           }
-          {!activeConnector &&
+          {!isConnected &&
           <ConnectButton chainStatus="icon" showBalance={false} label="Connect now to claim your tag"/>
           }
-          {activeConnector &&
+          {isConnected &&
           <Button color="primary" variant="contained" onClick={handleSetTag}>Claim Your Gamer Tag Now</Button>
           }
           <Typography color="textSecondary" gutterBottom>
@@ -119,7 +120,7 @@ const ClaimTagCards = ({styles}) => {
           <Typography color="textSecondary" gutterBottom>
             After claiming your tag, you will have the option to set a nickname.<br/>
             If a nickname is set then it will be used as your in-game display name instead of your tag.<br/>
-            All nicknames will be displayed with a <b>@</b> character, example: <b>@</b>Nugsy
+            All nicknames will be displayed with an <b>@</b> character, example: <b>@</b>Nugsy
             <br/><br/>
             The only cost to change your nickname is gas.
           </Typography>

@@ -9,7 +9,7 @@ import {useContractWrite, useNetwork} from "wagmi";
 import {useSnackbar} from 'notistack';
 
 const LookupAddressCards = ({styles}) => {
-  const {activeChain} = useNetwork();
+  const {chain} = useNetwork();
   const [tagInput, setTagInput] = useState("");
   const [address, setAddress] = useState("");
   const [tagClaimedTime, setTagClaimedTime] = useState(0);
@@ -17,14 +17,15 @@ const LookupAddressCards = ({styles}) => {
   const {enqueueSnackbar} = useSnackbar();
 
   const {writeAsync: tagLookup} = useContractWrite({
-      addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-      contractInterface: GamerTag?.abi
-    }, 'tagLookup'
-  );
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: 'tagLookup'
+  });
   const {writeAsync: tagClaimedAt} = useContractWrite({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-  }, "tagClaimedAt");
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: "tagClaimedAt"
+  });
 
   const handleSearchByTag = async () => {
     const playerAddress = await tagLookup({args: tagInput.startsWith("#") ? tagInput.substring(1) : tagInput})

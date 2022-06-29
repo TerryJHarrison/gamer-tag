@@ -9,7 +9,7 @@ import {useContractWrite, useNetwork} from "wagmi";
 import {useSnackbar} from 'notistack';
 
 const LookupPlayerCards = ({styles}) => {
-  const {activeChain} = useNetwork();
+  const {chain} = useNetwork();
   const [addressInput, setAddressInput] = useState("");
   const [nickname, setNickname] = useState("");
   const [tag, setTag] = useState("");
@@ -18,25 +18,23 @@ const LookupPlayerCards = ({styles}) => {
   const {enqueueSnackbar} = useSnackbar();
 
   const {writeAsync: getNickname} = useContractWrite({
-      addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-      contractInterface: GamerTag?.abi
-    }, 'getNickname', {
-      args: addressInput
-    }
-  );
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: 'getNickname',
+    args: addressInput
+  });
 
   const {writeAsync: getTag} = useContractWrite({
-      addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-      contractInterface: GamerTag?.abi
-    }, 'getTag', {
-      args: addressInput
-    }
-  );
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: 'getTag',
+    args: addressInput
+  });
 
   const {writeAsync: tagClaimedAt} = useContractWrite({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-  }, "tagClaimedAt", {
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: "tagClaimedAt",
     args: addressInput
   });
 

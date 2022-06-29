@@ -18,12 +18,12 @@ import {
 import {publicProvider} from 'wagmi/providers/public';
 import {SnackbarProvider} from 'notistack';
 
-const { chains, provider } = configureChains(
+const {chains, provider} = configureChains(
   [chain.polygonMumbai],
   [publicProvider()]
 );
 
-const { connectors } = getDefaultWallets({
+const {connectors} = getDefaultWallets({
   appName: '#gamer-tag',
   chains
 });
@@ -33,7 +33,6 @@ const wagmiClient = createClient({
   connectors,
   provider
 })
-
 
 ReactDOM.render(
   <WagmiConfig client={wagmiClient}>

@@ -6,17 +6,18 @@ import ClaimTagCards from "../components/ClaimTagCards";
 import ManageTagCards from "../components/ManageTagCards";
 
 const ManageTag = ({styles}) => {
-  const {activeChain} = useNetwork();
-  const {data: account} = useAccount();
+  const {chain} = useNetwork();
+  const {address} = useAccount();
 
   const {data: tag} = useContractRead({
-    addressOrName: GamerTag?.networks[activeChain?.id]?.address,
-    contractInterface: GamerTag?.abi
-  }, "getTag", {
-    args: account?.address
+    addressOrName: GamerTag?.networks[chain?.id]?.address,
+    contractInterface: GamerTag?.abi,
+    functionName: "getTag",
+    args: address,
+    watch: true
   });
 
-  if (!account || tag === "") {
+  if (!address || tag === "") {
     return <ClaimTagCards styles={styles}/>;
   }
 
