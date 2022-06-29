@@ -5,7 +5,8 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import '@rainbow-me/rainbowkit/dist/index.css';
 import {
-  getDefaultWallets,
+  connectorsForWallets,
+  wallet,
   RainbowKitProvider,
   lightTheme
 } from '@rainbow-me/rainbowkit';
@@ -23,10 +24,29 @@ const {chains, provider, webSocketProvider} = configureChains(
   [publicProvider()]
 );
 
-const {connectors} = getDefaultWallets({
-  appName: '#gamer-tag',
-  chains
-});
+const needsInjectedWalletFallback =
+  typeof window !== 'undefined' &&
+  window.ethereum &&
+  !window.ethereum.isMetaMask &&
+  !window.ethereum.isCoinbaseWallet;
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      wallet.argent({chains}),
+      wallet.brave({chains}),
+      wallet.coinbase({chains, appName: '#gamer-tag'}),
+      wallet.ledger({chains}),
+      wallet.metaMask({chains}),
+      wallet.rainbow({chains}),
+      wallet.trust({chains}),
+      wallet.walletConnect({chains}),
+      ...(needsInjectedWalletFallback
+        ? [wallet.injected({chains})]
+        : []),
+    ]
+  },
+]);
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
