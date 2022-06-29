@@ -3,7 +3,7 @@ pragma solidity ^0.8.11;
 
 import "./IGamerTag.sol";
 
-// @name Gamer Tag
+// @title Gamer Tag
 contract GamerTag is IGamerTag {
   mapping(address => string) private tags;          // Gamer addresses -> tags (unique)
   mapping(string => address) public tagLookup;      // Gamer tags -> addresses

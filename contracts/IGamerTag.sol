@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL
 pragma solidity ^0.8.11;
 
-// @name Gamer Tag Interface
+// @title Gamer Tag Interface
 // @notice Lightweight interface for interacting with the deployed GamerTag contract
 // @dev See GamerTag.sol for implementation
 interface IGamerTag {
