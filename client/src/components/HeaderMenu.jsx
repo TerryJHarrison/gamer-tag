@@ -23,11 +23,11 @@ const HeaderMenu = ({styles}) => {
         <Link to="/lookup" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/lookup")}>Lookup</Link>
         <Link to="/about" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/about")}>About</Link>
         <Link to="/developers" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/developers")}>Developers</Link>
+        <div className={isSmallScreen ? styles.hide : styles.spacing}/>
         <span className={isSmallScreen ? styles.hide : ''}>
-          <div className={styles.spacing}/>
           <ConnectButton chainStatus="icon" showBalance={false}/>
-          <div className={styles.grow}/>
         </span>
+        <div className={isSmallScreen ? styles.hide : styles.grow}/>
       </Toolbar>
     </AppBar>
   );
