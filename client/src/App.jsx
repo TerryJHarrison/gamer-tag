@@ -48,6 +48,9 @@ const App = () => {
       paddingRight: 6,
       borderRadius: 5,
       textDecoration: "none !important"
+    },
+    hide: {
+      display: "none"
     }
   });
   const styles = useStyles();
