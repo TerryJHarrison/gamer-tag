@@ -57,7 +57,7 @@ const About = ({styles}) => {
                 Who built and manages this?
               </Typography>
               <Typography color="textSecondary" gutterBottom>
-                My name is TJ Harrison, this is a personal project of mine. Once the project is 100% decentralized I don't intend to push updates nor do I see the need for it be actively managed.
+                My name is <Link href="https://www.linkedin.com/in/tjharrisonjr/">TJ Harrison</Link>, this is a personal project of mine. I currently maintain it, but once the project is 100% decentralized I don't intend to push updates nor do I see the need for it be actively managed.
               </Typography>
               <Typography color="textSecondary" gutterBottom>
                 Anyone else can always build their own newer, sleeker UI to interact with the contract (and is encouraged to, the more the merrier)!
