@@ -6,14 +6,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {ButtonGroup} from "@mui/material";
 import {useContractRead, useContractWrite, useWaitForTransaction, useAccount, useNetwork} from "wagmi";
-import {useSnackbar} from 'notistack';
+import {useSnackbar} from "notistack";
 import GamerTag from "../contracts/GamerTag.json";
 
 const ManageTagCards = ({tag, styles}) => {
   const {chain} = useNetwork();
   const {address} = useAccount();
   const {enqueueSnackbar} = useSnackbar();
-  const [updateTxn, setUpdateTxn] = useState('');
+  const [updateTxn, setUpdateTxn] = useState("");
   const [nicknameInput, setNicknameInput] = useState("");
 
   const {data: nickname} = useContractRead({
@@ -34,7 +34,7 @@ const ManageTagCards = ({tag, styles}) => {
   const {writeAsync: setNickname} = useContractWrite({
     addressOrName: GamerTag?.networks[chain?.id]?.address,
     contractInterface: GamerTag?.abi,
-    functionName: 'setNickname',
+    functionName: "setNickname",
     onSuccess(data) {
       setUpdateTxn(data.hash);
       enqueueSnackbar("Updating nickname...", {
@@ -58,7 +58,7 @@ const ManageTagCards = ({tag, styles}) => {
           vertical: "bottom"
         }
       });
-      setUpdateTxn('');
+      setUpdateTxn("");
     }
   })
 

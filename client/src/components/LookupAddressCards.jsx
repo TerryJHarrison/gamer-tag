@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import React, {useState} from "react";
 import GamerTag from "../contracts/GamerTag.json";
 import {useContractWrite, useNetwork} from "wagmi";
-import {useSnackbar} from 'notistack';
+import {useSnackbar} from "notistack";
 
 const LookupAddressCards = ({styles}) => {
   const {chain} = useNetwork();
@@ -19,7 +19,7 @@ const LookupAddressCards = ({styles}) => {
   const {writeAsync: tagLookup} = useContractWrite({
     addressOrName: GamerTag?.networks[chain?.id]?.address,
     contractInterface: GamerTag?.abi,
-    functionName: 'tagLookup'
+    functionName: "tagLookup"
   });
   const {writeAsync: tagClaimedAt} = useContractWrite({
     addressOrName: GamerTag?.networks[chain?.id]?.address,
@@ -36,14 +36,15 @@ const LookupAddressCards = ({styles}) => {
       setTagClaimedTime(claimTime);
     } else {
       setAddress("");
-      enqueueSnackbar(`No gamer going by #${tagInput.startsWith("#") ? tagInput.substring(1) : tagInput}`, {
+      const errorMessage = `No gamer going by #${tagInput.startsWith("#") ? tagInput.substring(1) : tagInput}`;
+      enqueueSnackbar(errorMessage, {
         variant: "error",
         anchorOrigin: {
           horizontal: "right",
           vertical: "bottom"
         }
       });
-      setErrorMessage(`No gamer going by #${tagInput.startsWith("#") ? tagInput.substring(1) : tagInput}`);
+      setErrorMessage(errorMessage);
       setTagClaimedTime(0);
     }
   };

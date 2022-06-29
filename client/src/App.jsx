@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import HeaderMenu from "./components/HeaderMenu";
 import ManageTag from "./pages/ManageTag";
 import About from "./pages/About";
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 import Lookup from "./pages/Lookup";
 import Developers from "./pages/Developers";
 

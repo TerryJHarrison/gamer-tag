@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import React, {useState} from "react";
 import GamerTag from "../contracts/GamerTag.json";
 import {useContractWrite, useNetwork} from "wagmi";
-import {useSnackbar} from 'notistack';
+import {useSnackbar} from "notistack";
 
 const LookupPlayerCards = ({styles}) => {
   const {chain} = useNetwork();
@@ -20,14 +20,14 @@ const LookupPlayerCards = ({styles}) => {
   const {writeAsync: getNickname} = useContractWrite({
     addressOrName: GamerTag?.networks[chain?.id]?.address,
     contractInterface: GamerTag?.abi,
-    functionName: 'getNickname',
+    functionName: "getNickname",
     args: addressInput
   });
 
   const {writeAsync: getTag} = useContractWrite({
     addressOrName: GamerTag?.networks[chain?.id]?.address,
     contractInterface: GamerTag?.abi,
-    functionName: 'getTag',
+    functionName: "getTag",
     args: addressInput
   });
 
@@ -38,10 +38,20 @@ const LookupPlayerCards = ({styles}) => {
     args: addressInput
   });
 
-  const clear = () => {
+  const displayError = errorMessage => {
+    // Clear loaded data from previous searches
     setTag("");
     setNickname("");
     setTagClaimedTime(0);
+    // Display error message inline and in message stack
+    setErrorMessage(errorMessage);
+    enqueueSnackbar(errorMessage, {
+      variant: "error",
+      anchorOrigin: {
+        horizontal: "right",
+        vertical: "bottom"
+      }
+    });
   }
 
   const handleLookup = async () => {
@@ -53,37 +63,13 @@ const LookupPlayerCards = ({styles}) => {
         setTagClaimedTime(await tagClaimedAt());
         setNickname(await getNickname());
       } else {
-        clear();
-        setErrorMessage("Address is not a gamer");
-        enqueueSnackbar("Address is not a gamer", {
-          variant: "error",
-          anchorOrigin: {
-            horizontal: "right",
-            vertical: "bottom"
-          }
-        });
+        displayError("Address is not a gamer");
       }
     } catch (e) {
       if(e.code === "INVALID_ARGUMENT") {
-        clear();
-        setErrorMessage("Not a valid address");
-        enqueueSnackbar("Not a valid address", {
-          variant: "error",
-          anchorOrigin: {
-            horizontal: "right",
-            vertical: "bottom"
-          }
-        });
+        displayError("Not a valid address");
       } else {
-        clear();
-        setErrorMessage("Unknown error, please try again");
-        enqueueSnackbar("Unknown error, please try again", {
-          variant: "error",
-          anchorOrigin: {
-            horizontal: "right",
-            vertical: "bottom"
-          }
-        });
+        displayError("Unknown error, please try again");
       }
     }
   };

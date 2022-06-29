@@ -1,7 +1,7 @@
 import React from "react";
 
 import GamerTag from "../contracts/GamerTag.json";
-import {useAccount, useContractRead, useNetwork} from 'wagmi'
+import {useAccount, useContractRead, useNetwork} from "wagmi"
 import ClaimTagCards from "../components/ClaimTagCards";
 import ManageTagCards from "../components/ManageTagCards";
 

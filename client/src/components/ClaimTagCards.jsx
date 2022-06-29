@@ -7,39 +7,37 @@ import React, {useState} from "react";
 import GamerTag from "../contracts/GamerTag.json";
 import {useContractWrite, useAccount, useNetwork, useWaitForTransaction} from "wagmi";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
-import {useSnackbar} from 'notistack';
+import {useSnackbar} from "notistack";
 
 const ClaimTagCards = ({styles}) => {
   const {chain} = useNetwork();
   const {isConnected} = useAccount();
   const [tagInput, setTagInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [updateTxn, setUpdateTxn] = useState('');
+  const [updateTxn, setUpdateTxn] = useState("");
   const {enqueueSnackbar} = useSnackbar();
+
+  const displayError = errorMessage => {
+    // Display error message inline and in message stack
+    setErrorMessage(errorMessage);
+    enqueueSnackbar(errorMessage, {
+      variant: "error",
+      anchorOrigin: {
+        horizontal: "right",
+        vertical: "bottom"
+      }
+    });
+  }
 
   const {write: setTag} = useContractWrite({
       addressOrName: GamerTag?.networks[chain?.id]?.address,
       contractInterface: GamerTag?.abi,
-      functionName: 'claimTag',
+      functionName: "claimTag",
       onError(error) {
         if(error.reason === "execution reverted: GT: tag already claimed"){
-          enqueueSnackbar("Tag has already been claimed, try another!", {
-            variant: "error",
-            anchorOrigin: {
-              horizontal: "right",
-              vertical: "bottom"
-            }
-          });
-          setErrorMessage("Tag has already been claimed, try another");
+          displayError("Tag has already been claimed, try another!");
         } else {
-          enqueueSnackbar("Unknown error, please try again", {
-            variant: "error",
-            anchorOrigin: {
-              horizontal: "right",
-              vertical: "bottom"
-            }
-          });
-          setErrorMessage("Unknown error, please try again");
+          displayError("Unknown error, please try again");
         }
       },
       onSuccess(data) {
@@ -67,7 +65,7 @@ const ClaimTagCards = ({styles}) => {
           vertical: "bottom"
         }
       });
-      setUpdateTxn('');
+      setUpdateTxn("");
     }
   })
 

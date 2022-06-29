@@ -1,6 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 const path = require("path");
-const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
@@ -21,7 +21,7 @@ module.exports = {
       version: "pragma",
     }
   },
-  plugins: ['truffle-plugin-verify'],
+  plugins: ["truffle-plugin-verify"],
   api_keys: {
     polygonscan: process.env.POLYGON_SCAN_API_KEY
   }

@@ -1,7 +1,7 @@
 # gamer-tag front-end client
 
 ### Player flow
-Outline of a player's interaction with the application.
+Outline of a player"s interaction with the application.
 ```mermaid
 flowchart TD
 	A["New Player"] --> B{"Claim Gamer Tag\n\n#NugsyNash"} --> C{"Set Nickname\n\n@Nugsy"} --> D["Play Games!"]

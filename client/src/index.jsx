@@ -1,23 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 import {BrowserRouter} from "react-router-dom";
-import '@rainbow-me/rainbowkit/dist/index.css';
+import "@rainbow-me/rainbowkit/dist/index.css";
 import {
   connectorsForWallets,
   wallet,
   RainbowKitProvider,
   lightTheme
-} from '@rainbow-me/rainbowkit';
+} from "@rainbow-me/rainbowkit";
 import {
   chain,
   configureChains,
   createClient,
   WagmiConfig,
-} from 'wagmi';
-import {publicProvider} from 'wagmi/providers/public';
-import {SnackbarProvider} from 'notistack';
+} from "wagmi";
+import {publicProvider} from "wagmi/providers/public";
+import {SnackbarProvider} from "notistack";
 
 const {chains, provider, webSocketProvider} = configureChains(
   [chain.polygonMumbai],
@@ -25,17 +25,17 @@ const {chains, provider, webSocketProvider} = configureChains(
 );
 
 const needsInjectedWalletFallback =
-  typeof window !== 'undefined' &&
+  typeof window !== "undefined" &&
   window.ethereum &&
   !window.ethereum.isMetaMask &&
   !window.ethereum.isCoinbaseWallet;
 const connectors = connectorsForWallets([
   {
-    groupName: 'Popular',
+    groupName: "Popular",
     wallets: [
       wallet.argent({chains}),
       wallet.brave({chains}),
-      wallet.coinbase({chains, appName: '#gamer-tag'}),
+      wallet.coinbase({chains, appName: "#gamer-tag"}),
       wallet.ledger({chains}),
       wallet.metaMask({chains}),
       wallet.rainbow({chains}),
@@ -57,12 +57,12 @@ const wagmiClient = createClient({
 ReactDOM.render(
   <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains}
-                        appInfo={{appName: '#gamer-tag'}}
+                        appInfo={{appName: "#gamer-tag"}}
                         theme={lightTheme({
-                          accentColor: '#1976d2',
-                          borderRadius: 'small',
-                          fontStack: 'system',
-                          overlayBlur: 'small'
+                          accentColor: "#1976d2",
+                          borderRadius: "small",
+                          fontStack: "system",
+                          overlayBlur: "small"
                         })}>
       <BrowserRouter>
         <SnackbarProvider maxSnack={3}>
@@ -71,5 +71,5 @@ ReactDOM.render(
       </BrowserRouter>
     </RainbowKitProvider>
   </WagmiConfig>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

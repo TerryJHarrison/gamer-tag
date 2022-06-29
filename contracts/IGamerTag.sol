@@ -16,7 +16,7 @@ interface IGamerTag {
   // @name Nickname Change
   // @notice Fired whenever a nickname is updated
   // @param from The address that has updated their nickname
-  // @param nickname The player's new nickname
+  // @param nickname The player"s new nickname
   event NicknameChange(address indexed from, string nickname);
 
   // --- Nicknames ---
@@ -57,9 +57,9 @@ interface IGamerTag {
   function tagClaimedAt(address _address) external view returns(uint256);
 
   // @name Lookup Tag
-  // @notice Gets a tag's address, will return an empty string if address has not claimed
+  // @notice Gets a tag"s address, will return an empty string if address has not claimed
   // @param _tag tag to lookup address for
-  // @return Tag's address
+  // @return Tag"s address
   function tagLookup(string memory _tag) external view returns(address);
 
   // --- Decentralization Support ---

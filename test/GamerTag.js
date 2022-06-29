@@ -1,7 +1,7 @@
 const GamerTag = artifacts.require("GamerTag");
-const {expectRevert, expectEvent} = require('@openzeppelin/test-helpers');
+const {expectRevert, expectEvent} = require("@openzeppelin/test-helpers");
 
-const GenericNFT = artifacts.require('GenericNFT');
+const GenericNFT = artifacts.require("GenericNFT");
 
 contract("GamerTag", (accounts) => {
   let [tj, justin] = accounts;
@@ -15,7 +15,7 @@ contract("GamerTag", (accounts) => {
 
   it("allows claiming a tag", async () => {
     const receipt = await gamerTag.claimTag("NugsyNash", {from: tj});
-    expectEvent(receipt, 'TagClaim', {
+    expectEvent(receipt, "TagClaim", {
       from: tj,
       tag: "NugsyNash"
     });
@@ -30,7 +30,7 @@ contract("GamerTag", (accounts) => {
 
   it("allows setting a nickname", async () => {
     const receipt = await gamerTag.setNickname("Nugsy");
-    expectEvent(receipt, 'NicknameChange', {
+    expectEvent(receipt, "NicknameChange", {
       from: tj,
       nickname: "Nugsy"
     });
@@ -40,7 +40,7 @@ contract("GamerTag", (accounts) => {
 
   it("allows updating a nickname", async () => {
     const receipt = await gamerTag.setNickname("Nugsy Nash");
-    expectEvent(receipt, 'NicknameChange', {
+    expectEvent(receipt, "NicknameChange", {
       from: tj,
       nickname: "Nugsy Nash"
     });
@@ -50,7 +50,7 @@ contract("GamerTag", (accounts) => {
 
   it("allows clearing a nickname", async () => {
     const receipt = await gamerTag.setNickname("");
-    expectEvent(receipt, 'NicknameChange', {
+    expectEvent(receipt, "NicknameChange", {
       from: tj,
       nickname: ""
     });

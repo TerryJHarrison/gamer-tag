@@ -3,12 +3,12 @@ import {ConnectButton} from "@rainbow-me/rainbowkit";
 import AppBar from "@mui/material/AppBar";
 import React from "react";
 import {Link as RouterLink, useLocation} from "react-router-dom";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "@mui/material/Link";
 
 const HeaderMenu = ({styles}) => {
   let {pathname} = useLocation();
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   function getHeaderStyles(path){
     return pathname === path ? styles.headerLinkActive : styles.headerLink
@@ -24,7 +24,7 @@ const HeaderMenu = ({styles}) => {
         <Link to="/about" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/about")}>About</Link>
         <Link to="/developers" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/developers")}>Developers</Link>
         <div className={isSmallScreen ? styles.hide : styles.spacing}/>
-        <span className={isSmallScreen ? styles.hide : ''}>
+        <span className={isSmallScreen ? styles.hide : ""}>
           <ConnectButton chainStatus="icon" showBalance={false}/>
         </span>
         <div className={isSmallScreen ? styles.hide : styles.grow}/>
