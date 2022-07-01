@@ -1,67 +1,35 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import React, {useState} from "react";
-import GamerTag from "../contracts/GamerTag.json";
-import {useContractWrite, useNetwork} from "wagmi";
-import {useSnackbar} from "notistack";
+import {Button, Card, CardContent, TextField, Typography} from "@mui/material";
+import {useGamerTag, useNotifications} from "../hooks";
 
-const LookupPlayerCards = ({styles}) => {
-  const {chain} = useNetwork();
+const LookupPlayerCard = ({styles}) => {
   const [addressInput, setAddressInput] = useState("");
-  const [nickname, setNickname] = useState("");
   const [tag, setTag] = useState("");
+  const [nickname, setNickname] = useState("");
   const [tagClaimedTime, setTagClaimedTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const {enqueueSnackbar} = useSnackbar();
-
-  const {writeAsync: getNickname} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "getNickname",
-    args: addressInput
-  });
-
-  const {writeAsync: getTag} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "getTag",
-    args: addressInput
-  });
-
-  const {writeAsync: tagClaimedAt} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "tagClaimedAt",
-    args: addressInput
-  });
+  const {notifyError} = useNotifications();
+  const {getTag, getNickname, getTagClaimTime} = useGamerTag();
 
   const displayError = errorMessage => {
     // Clear loaded data from previous searches
     setTag("");
     setNickname("");
     setTagClaimedTime(0);
+
     // Display error message inline and in message stack
     setErrorMessage(errorMessage);
-    enqueueSnackbar(errorMessage, {
-      variant: "error",
-      anchorOrigin: {
-        horizontal: "right",
-        vertical: "bottom"
-      }
-    });
+    notifyError(errorMessage);
   }
 
   const handleLookup = async () => {
     try {
-      const tag = await getTag();
+      const tag = await getTag(addressInput);
       if (tag) {
         setTag(tag);
         setErrorMessage("");
-        setTagClaimedTime(await tagClaimedAt());
-        setNickname(await getNickname());
+        setTagClaimedTime(await getTagClaimTime(addressInput));
+        setNickname(await getNickname(addressInput));
       } else {
         displayError("Address is not a gamer");
       }
@@ -109,4 +77,4 @@ const LookupPlayerCards = ({styles}) => {
   );
 }
 
-export default LookupPlayerCards;
+export default LookupPlayerCard;

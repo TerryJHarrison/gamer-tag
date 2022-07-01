@@ -1,71 +1,20 @@
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
 import React, {useState} from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import {ButtonGroup} from "@mui/material";
-import {useContractRead, useContractWrite, useWaitForTransaction, useAccount, useNetwork} from "wagmi";
-import {useSnackbar} from "notistack";
-import GamerTag from "../contracts/GamerTag.json";
-import MobileWalletConnectCard from "./MobileWalletConnectCard";
+import {Button, ButtonGroup, Card, CardContent, Typography, TextField} from "@mui/material";
+import {FloatingMobileWalletConnectButton} from ".";
+import {useGamerTag, useSetNickname, useNotifications} from "../hooks";
 
 const ManageTagCards = ({tag, styles}) => {
-  const {chain} = useNetwork();
-  const {address} = useAccount();
-  const {enqueueSnackbar} = useSnackbar();
-  const [updateTxn, setUpdateTxn] = useState("");
   const [nicknameInput, setNicknameInput] = useState("");
+  const {notify, notifySuccess} = useNotifications();
+  const {nickname, tagClaimedAt} = useGamerTag();
 
-  const {data: nickname} = useContractRead({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "getNickname",
-    args: address,
-    watch: true
-  });
-
-  const {data: tagClaimedAt} = useContractRead({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "tagClaimedAt",
-    args: address
-  });
-
-  const {writeAsync: setNickname} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "setNickname",
-    onSuccess(data) {
-      setUpdateTxn(data.hash);
-      enqueueSnackbar("Updating nickname...", {
-        variant: "info",
-        anchorOrigin: {
-          horizontal: "right",
-          vertical: "bottom"
-        }
-      });
-    }
-  });
-
-  // Listen for successful setNickname calls
-  useWaitForTransaction({
-    hash: updateTxn,
-    onSuccess() {
-      enqueueSnackbar("Nickname updated", {
-        variant: "success",
-        anchorOrigin: {
-          horizontal: "right",
-          vertical: "bottom"
-        }
-      });
-      setUpdateTxn("");
-    }
-  })
+  const onSubmit = () => notify("Updating nickname...")
+  const onSuccess = () => notifySuccess("Nickname updated")
+  const {setNickname} = useSetNickname(onSubmit, onSuccess);
 
   const handleNicknameChange = event => setNicknameInput(event.target.value);
-  const handleSetNickname = async () => setNickname({args: nicknameInput.startsWith("@") ? nicknameInput.substring(1) : nicknameInput});
-  const handleClearNickname = async () => setNickname({args: [""]});
+  const handleSetNickname = async () => setNickname(nicknameInput.startsWith("@") ? nicknameInput.substring(1) : nicknameInput);
+  const handleClearNickname = async () => setNickname("");
 
   const d = new Date(tagClaimedAt * 1000); // Used for datetime formatting
   return (
@@ -118,7 +67,7 @@ const ManageTagCards = ({tag, styles}) => {
         </CardContent>
       </Card>
 
-      <MobileWalletConnectCard styles={styles}/>
+      <FloatingMobileWalletConnectButton styles={styles}/>
     </>
   );
 }

@@ -1,76 +1,36 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import React, {useState} from "react";
-import GamerTag from "../contracts/GamerTag.json";
-import {useContractWrite, useAccount, useNetwork, useWaitForTransaction} from "wagmi";
+import {Button, Card, CardContent, TextField, Typography} from "@mui/material";
+import {FloatingMobileWalletConnectButton} from ".";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
-import {useSnackbar} from "notistack";
-import MobileWalletConnectCard from "./MobileWalletConnectCard";
+import {useAccount} from "wagmi";
+import {useSetTag, useNotifications} from "../hooks";
 
 const ClaimTagCards = ({styles}) => {
-  const {chain} = useNetwork();
   const {isConnected} = useAccount();
   const [tagInput, setTagInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [updateTxn, setUpdateTxn] = useState("");
-  const {enqueueSnackbar} = useSnackbar();
+  const {notify, notifySuccess, notifyError} = useNotifications();
 
   const displayError = errorMessage => {
     // Display error message inline and in message stack
     setErrorMessage(errorMessage);
-    enqueueSnackbar(errorMessage, {
-      variant: "error",
-      anchorOrigin: {
-        horizontal: "right",
-        vertical: "bottom"
-      }
-    });
+    notifyError(errorMessage);
   }
 
-  const {write: setTag} = useContractWrite({
-      addressOrName: GamerTag?.networks[chain?.id]?.address,
-      contractInterface: GamerTag?.abi,
-      functionName: "claimTag",
-      onError(error) {
-        if(error.reason === "execution reverted: GT: tag already claimed"){
-          displayError("Tag has already been claimed, try another!");
-        } else {
-          displayError("Unknown error, please try again");
-        }
-      },
-      onSuccess(data) {
-        setUpdateTxn(data.hash);
-        enqueueSnackbar("Claiming tag...", {
-          variant: "info",
-          anchorOrigin: {
-            horizontal: "right",
-            vertical: "bottom"
-          }
-        });
-        setErrorMessage("");
-      }
+  const onSubmit = () => {
+    notify("Claiming tag...")
+    setErrorMessage("");
+  }
+  const onSuccess = () => notifySuccess("Gamer tag claimed!");
+  const onError = error => {
+    if(error.reason === "execution reverted: GT: tag already claimed"){
+      displayError("Tag has already been claimed, try another!");
+    } else {
+      displayError("Unknown error, please try again");
     }
-  );
-
-  // Listen for successful setTag calls
-  useWaitForTransaction({
-    hash: updateTxn,
-    onSuccess() {
-      enqueueSnackbar("Gamer tag claimed!", {
-        variant: "success",
-        anchorOrigin: {
-          horizontal: "right",
-          vertical: "bottom"
-        }
-      });
-      setUpdateTxn("");
-    }
-  })
-
-  const handleSetTag = () => setTag({args: tagInput.startsWith("#") ? tagInput.substring(1) : tagInput});
+  }
+  const {setTag} = useSetTag(onSubmit, onSuccess, onError);
+  const handleSetTag = () => setTag(tagInput.startsWith("#") ? tagInput.substring(1) : tagInput);
   const handleTagChange = event => setTagInput(event.target.value);
 
   return (
@@ -126,7 +86,7 @@ const ClaimTagCards = ({styles}) => {
         </CardContent>
       </Card>
 
-      <MobileWalletConnectCard styles={styles}/>
+      <FloatingMobileWalletConnectButton styles={styles}/>
     </>
   );
 }

@@ -1,21 +1,22 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import LookupAddressCards from "../components/LookupAddressCards";
-import LookupPlayerCards from "../components/LookupPlayerCards";
+import {Card, CardContent, Typography} from "@mui/material";
+import {FloatingMobileWalletConnectButton, LookupAddressCard, LookupPlayerCard} from "../components";
 import {useAccount} from "wagmi";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
-import MobileWalletConnectCard from "../components/MobileWalletConnectCard";
 
+/**
+ * Player lookup page
+ * @param styles
+ * @returns {JSX.Element}
+ */
 const Lookup = ({styles}) => {
   const {isConnected} = useAccount();
 
   return isConnected ? (
     <>
-      <LookupAddressCards styles={styles}/>
-      <LookupPlayerCards styles={styles}/>
-      <MobileWalletConnectCard styles={styles}/>
+      <LookupAddressCard styles={styles}/>
+      <LookupPlayerCard styles={styles}/>
+      <FloatingMobileWalletConnectButton styles={styles}/>
     </>
   ) : (
     <Card className={styles.topMargined}>

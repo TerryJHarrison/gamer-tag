@@ -1,49 +1,27 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import React, {useState} from "react";
-import GamerTag from "../contracts/GamerTag.json";
-import {useContractWrite, useNetwork} from "wagmi";
-import {useSnackbar} from "notistack";
+import {Button, Card, CardContent, TextField, Typography} from "@mui/material";
+import {useGamerTag, useNotifications} from "../hooks";
 
-const LookupAddressCards = ({styles}) => {
-  const {chain} = useNetwork();
+const LookupAddressCard = ({styles}) => {
   const [tagInput, setTagInput] = useState("");
   const [address, setAddress] = useState("");
   const [tagClaimedTime, setTagClaimedTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const {enqueueSnackbar} = useSnackbar();
+  const {notifyError} = useNotifications();
+  const {getPlayerFromTag, getTagClaimTime} = useGamerTag();
 
-  const {writeAsync: tagLookup} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "tagLookup"
-  });
-  const {writeAsync: tagClaimedAt} = useContractWrite({
-    addressOrName: GamerTag?.networks[chain?.id]?.address,
-    contractInterface: GamerTag?.abi,
-    functionName: "tagClaimedAt"
-  });
-
+  const formattedTag = tagInput.startsWith("#") ? tagInput.substring(1) : tagInput;
   const handleSearchByTag = async () => {
-    const playerAddress = await tagLookup({args: tagInput.startsWith("#") ? tagInput.substring(1) : tagInput})
+    const playerAddress = await getPlayerFromTag(formattedTag)
     if(playerAddress !== "0x0000000000000000000000000000000000000000") {
-      const claimTime = await tagClaimedAt({args: playerAddress});
+      const claimTime = await getTagClaimTime(playerAddress);
       setAddress(playerAddress);
       setErrorMessage("");
       setTagClaimedTime(claimTime);
     } else {
       setAddress("");
-      const errorMessage = `No gamer going by #${tagInput.startsWith("#") ? tagInput.substring(1) : tagInput}`;
-      enqueueSnackbar(errorMessage, {
-        variant: "error",
-        anchorOrigin: {
-          horizontal: "right",
-          vertical: "bottom"
-        }
-      });
+      const errorMessage = `No gamer going by #${formattedTag}`;
+      notifyError(errorMessage);
       setErrorMessage(errorMessage);
       setTagClaimedTime(0);
     }
@@ -79,4 +57,4 @@ const LookupAddressCards = ({styles}) => {
   );
 }
 
-export default LookupAddressCards;
+export default LookupAddressCard;

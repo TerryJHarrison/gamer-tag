@@ -1,10 +1,12 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import MobileWalletConnectCard from "../components/MobileWalletConnectCard";
+import {Card, CardContent, Link, Typography} from "@mui/material";
+import {FloatingMobileWalletConnectButton} from "../components";
 
+/**
+ * About page
+ * @param styles
+ * @returns {JSX.Element}
+ */
 const About = ({styles}) => {
   return (
     <>
@@ -83,7 +85,7 @@ const About = ({styles}) => {
         </CardContent>
       </Card>
 
-      <MobileWalletConnectCard styles={styles}/>
+      <FloatingMobileWalletConnectButton styles={styles}/>
     </>
   );
 }

@@ -4,10 +4,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 /**
  * Card that is only shown on mobile (small) devices. Contains a wallet connect button.
- * @param styles
+ * @param styles Styles object passed from App.jsx
  * @returns {JSX.Element}
  */
-const MobileWalletConnectCard = ({styles}) => {
+const FloatingMobileWalletConnectButton = ({styles}) => {
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   return (
@@ -17,4 +17,4 @@ const MobileWalletConnectCard = ({styles}) => {
   );
 }
 
-export default MobileWalletConnectCard;
+export default FloatingMobileWalletConnectButton;
