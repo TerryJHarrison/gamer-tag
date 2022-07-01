@@ -1,4 +1,4 @@
-# gamer-tag front-end client
+# GamerTag front-end client
 
 ### Player flow
 Outline of a player"s interaction with the application.

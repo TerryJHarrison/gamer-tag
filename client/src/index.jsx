@@ -35,7 +35,7 @@ const connectors = connectorsForWallets([
     wallets: [
       wallet.argent({chains}),
       wallet.brave({chains}),
-      wallet.coinbase({chains, appName: "#gamer-tag"}),
+      wallet.coinbase({chains, appName: "#GamerTag"}),
       wallet.ledger({chains}),
       wallet.metaMask({chains}),
       wallet.rainbow({chains}),
@@ -57,7 +57,7 @@ const wagmiClient = createClient({
 ReactDOM.render(
   <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains}
-                        appInfo={{appName: "#gamer-tag"}}
+                        appInfo={{appName: "#GamerTag"}}
                         theme={lightTheme({
                           accentColor: "#1976d2",
                           borderRadius: "small",

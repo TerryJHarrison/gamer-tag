@@ -15,14 +15,14 @@ const HeaderMenu = ({styles}) => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={styles.headerBar}>
       <Toolbar>
         <div className={styles.grow}/>
-        <Link to="/" component={RouterLink} variant={isSmallScreen ? "h7" : "h6"} className={getHeaderStyles("/")}>#gamer-tag</Link>
+        <Link to="/" component={RouterLink} variant={isSmallScreen ? "h6" : "h5"} className={getHeaderStyles("/")}>#GamerTag</Link>
         <div className={styles.grow}/>
-        <Link to="/lookup" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/lookup")}>Lookup</Link>
-        <Link to="/about" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/about")}>About</Link>
-        <Link to="/developers" component={RouterLink} variant={isSmallScreen ? "h6" : "h6"} className={getHeaderStyles("/developers")}>Developers</Link>
+        <Link to="/lookup" component={RouterLink} variant={isSmallScreen ? "h6" : "h5"} className={getHeaderStyles("/lookup")}>Lookup</Link>
+        <Link to="/about" component={RouterLink} variant={isSmallScreen ? "h6" : "h5"} className={getHeaderStyles("/about")}>About</Link>
+        {/*<Link to="/developers" component={RouterLink} variant={isSmallScreen ? "h6" : "h5"} className={getHeaderStyles("/developers")}>Developers</Link>*/}
         <div className={isSmallScreen ? styles.hide : styles.spacing}/>
         <span className={isSmallScreen ? styles.hide : ""}>
           <ConnectButton chainStatus="icon" showBalance={false}/>

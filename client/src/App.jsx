@@ -7,7 +7,6 @@ import ManageTag from "./pages/ManageTag";
 import About from "./pages/About";
 import { makeStyles } from "@mui/styles";
 import Lookup from "./pages/Lookup";
-import Developers from "./pages/Developers";
 
 const App = () => {
   const useStyles = makeStyles({
@@ -46,11 +45,18 @@ const App = () => {
       justifyContent: "center",
       paddingLeft: 6,
       paddingRight: 6,
-      borderRadius: 5,
+      borderRadius: 6,
       textDecoration: "none !important"
     },
     hide: {
       display: "none"
+    },
+    headerBar: {
+      paddingTop: "0.5em"
+    },
+    mobileWalletConnect: {
+      marginTop: 15,
+      float: "right"
     }
   });
   const styles = useStyles();
@@ -58,12 +64,11 @@ const App = () => {
   return (
     <Box component="span">
       <HeaderMenu styles={styles}/>
-      <Container className={styles.topPadded}>
+      <Container>
         <Routes>
           <Route path="/" element={<ManageTag styles={styles}/>}/>
           <Route path="about" element={<About styles={styles}/>}/>
           <Route path="lookup" element={<Lookup styles={styles}/>}/>
-          <Route path="developers" element={<Developers styles={styles}/>}/>
         </Routes>
       </Container>
     </Box>

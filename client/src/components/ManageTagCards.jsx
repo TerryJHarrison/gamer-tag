@@ -8,6 +8,7 @@ import {ButtonGroup} from "@mui/material";
 import {useContractRead, useContractWrite, useWaitForTransaction, useAccount, useNetwork} from "wagmi";
 import {useSnackbar} from "notistack";
 import GamerTag from "../contracts/GamerTag.json";
+import MobileWalletConnectCard from "./MobileWalletConnectCard";
 
 const ManageTagCards = ({tag, styles}) => {
   const {chain} = useNetwork();
@@ -69,7 +70,7 @@ const ManageTagCards = ({tag, styles}) => {
   const d = new Date(tagClaimedAt * 1000); // Used for datetime formatting
   return (
     <>
-      <Card className={styles.topPadded}>
+      <Card className={styles.topMargined}>
         <CardContent>
           <Typography variant="h5" component="h2">
             #{tag}
@@ -116,6 +117,8 @@ const ManageTagCards = ({tag, styles}) => {
           </Typography>
         </CardContent>
       </Card>
+
+      <MobileWalletConnectCard styles={styles}/>
     </>
   );
 }

@@ -8,6 +8,7 @@ import GamerTag from "../contracts/GamerTag.json";
 import {useContractWrite, useAccount, useNetwork, useWaitForTransaction} from "wagmi";
 import {ConnectButton} from "@rainbow-me/rainbowkit";
 import {useSnackbar} from "notistack";
+import MobileWalletConnectCard from "./MobileWalletConnectCard";
 
 const ClaimTagCards = ({styles}) => {
   const {chain} = useNetwork();
@@ -74,7 +75,7 @@ const ClaimTagCards = ({styles}) => {
 
   return (
     <>
-      <Card className={styles.topPadded}>
+      <Card className={styles.topMargined}>
         <CardContent>
           <Typography variant="h5" component="h2">
             Choose your tag
@@ -124,6 +125,8 @@ const ClaimTagCards = ({styles}) => {
           </Typography>
         </CardContent>
       </Card>
+
+      <MobileWalletConnectCard styles={styles}/>
     </>
   );
 }
